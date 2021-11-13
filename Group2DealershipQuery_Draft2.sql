@@ -9,7 +9,7 @@ go
 
 --Create Table Statements: Nick Barney
 create table ZipCode (
-	ZipCodeID smallint not null, --identity?
+	ZipCodeID smallint not null, --identity?  Thinking NO
 	City char(20) not null,
 	PeopleState char(12) default 'Michigan' not null,
 	--constraints
@@ -18,12 +18,12 @@ create table ZipCode (
 go
 
 create table People (
-	PeopleID int not null, --identity (1000, 1)? or larger initial value?
+	PeopleID int not null, --identity (1000, 1)? or larger initial value? OK to start at 1000
 	PeopleType char(20) default 'Customer' not null,
 	FirstName char(15) not null,
 	LastName char(15) not null,
 	DOB date not null,
-	PeopleAddress varchar(80) not null, --Changed attribute name due to a present function
+	PeopleAddress varchar(80) not null, --Changed attribute name due to a present function --Updated ERD
 	SSN int not null, 
 	ZipCodeID smallint not null,
 	Email varchar(50) not null,
@@ -59,7 +59,7 @@ create table Employee (
 go
 
 create table Feature (
-	FeatureID smallint not null, --identity?
+	FeatureID smallint not null, --identity? YES start a 1?
 	FeatureName char(25) not null,
 	FeatureDesc varchar(100) not null,
 	Price decimal (5, 2) not null,
@@ -69,7 +69,7 @@ create table Feature (
 go
 
 create table Inventory (
-	InventoryID int not null, --identity?
+	InventoryID int not null, --identity? YES start at 100?
 	InventoryType char(7) not null,
 	QuantityInStock smallint not null,
 	--constraints
