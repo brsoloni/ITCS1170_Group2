@@ -9,7 +9,7 @@ go
 
 --Create Table Statements: Nick Barney
 create table ZipCode (
-	ZipCodeID smallint not null, --identity?  Thinking NO
+	ZipCodeID smallint not null,
 	City char(20) not null,
 	PeopleState char(12) default 'Michigan' not null,
 	--constraints
@@ -18,12 +18,12 @@ create table ZipCode (
 go
 
 create table People (
-	PeopleID int not null, --identity (1000, 1)? or larger initial value? OK to start at 1000
+	PeopleID int identity(1000, 1) not null,
 	PeopleType char(20) default 'Customer' not null,
 	FirstName char(15) not null,
 	LastName char(15) not null,
 	DOB date not null,
-	PeopleAddress varchar(80) not null, --Changed attribute name due to a present function --Updated ERD
+	PeopleAddress varchar(80) not null,
 	SSN int not null, 
 	ZipCodeID smallint not null,
 	Email varchar(50) not null,
@@ -59,7 +59,7 @@ create table Employee (
 go
 
 create table Feature (
-	FeatureID smallint not null, --identity? YES start a 1?
+	FeatureID smallint identity(1, 1) not null,
 	FeatureName char(25) not null,
 	FeatureDesc varchar(100) not null,
 	Price decimal (5, 2) not null,
@@ -69,7 +69,7 @@ create table Feature (
 go
 
 create table Inventory (
-	InventoryID int not null, --identity? YES start at 100?
+	InventoryID int identity(100, 1) not null,
 	InventoryType char(7) not null,
 	QuantityInStock smallint not null,
 	--constraints
@@ -92,7 +92,7 @@ create table Feature_Inventory (
 go
 
 create table Make (
-	MakeID smallint not null, --identity?
+	MakeID smallint identity(1, 1) not null,
 	MakeDesc varchar(100)  not null,
 	--constraints
 	constraint make_makeid_pk primary key (MakeID)
@@ -100,7 +100,7 @@ create table Make (
 go
 
 create table Model (
-	ModelID smallint not null, --identity?
+	ModelID smallint identity(1, 1) not null,
 	ModelDesc varchar(100)  not null,
 	--constraints
 	constraint model_modelid_pk primary key (ModelID)
@@ -108,7 +108,7 @@ create table Model (
 go
 
 create table Color (
-	ColorID tinyint not null, --identity?
+	ColorID tinyint identity(1, 1) not null,
 	ColorDesc char(50) not null,
 	--constraints
 	constraint color_colorid_pk primary key (ColorID)
@@ -116,7 +116,7 @@ create table Color (
 go
 
 create table VehicleType (
-	TypeID tinyint not null, --identity?
+	TypeID tinyint identity(1, 1) not null,
 	VehicleType char(15) not null,
 	--constraints
 	constraint vehicletype_typeid_pk primary key (TypeID)
@@ -124,13 +124,13 @@ create table VehicleType (
 go
 
 create table Vehicle (
-	VehicleID int not null, --identity?
+	VehicleID int identity(1000,1) not null,
 	MakeID smallint not null,
 	ModelID smallint not null,
 	ColorID tinyint not null,
 	TypeID tinyint not null,
 	InventoryID int not null,
-	VehicleYear smallint not null, --changed attribute name due to a present function
+	VehicleYear smallint not null,
 	WholesalePrice decimal (6, 2) not null,
 	RetailPrice decimal (6, 2) not null,
 	--key constraints
@@ -157,7 +157,7 @@ create table Vehicle (
 go
 
 create table Invoice (
-	InvoiceID int not null, --identity?
+	InvoiceID int identity(1000,1) not null,
 	CustomerID int not null,
 	EmployeeID int not null,
 	VehicleID int not null,
@@ -196,7 +196,7 @@ go
 from Feature_Invoice;
 go*/
 
---Example Vehicle Table Insert with Test Select
+--Example Vehicle Table Insert with Test Select NOTE: Omit ID inserts to work with our identity increments
 /*insert into Make
 	(MakeID, MakeDesc)
 values
