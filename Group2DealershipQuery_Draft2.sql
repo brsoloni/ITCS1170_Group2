@@ -92,7 +92,7 @@ create table Feature_Inventory (
 go
 
 create table Make (
-	MakeID smallint identity(1, 1) not null,
+	MakeID smallint identity(1000, 100) not null,
 	MakeDesc varchar(100)  not null,
 	--constraints
 	constraint make_makeid_pk primary key (MakeID)
@@ -100,7 +100,7 @@ create table Make (
 go
 
 create table Model (
-	ModelID smallint identity(1, 1) not null,
+	ModelID smallint identity(100, 100) not null,
 	ModelDesc varchar(100)  not null,
 	--constraints
 	constraint model_modelid_pk primary key (ModelID)
@@ -108,7 +108,7 @@ create table Model (
 go
 
 create table Color (
-	ColorID tinyint identity(1, 1) not null,
+	ColorID tinyint identity(10, 10) not null,
 	ColorDesc char(50) not null,
 	--constraints
 	constraint color_colorid_pk primary key (ColorID)
@@ -124,7 +124,7 @@ create table VehicleType (
 go
 
 create table Vehicle (
-	VehicleID int identity(1000,1) not null,
+	VehicleID int identity(1,1) not null,
 	MakeID smallint not null,
 	ModelID smallint not null,
 	ColorID tinyint not null,
