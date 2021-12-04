@@ -1,0 +1,54 @@
+use Dealership
+go
+
+--Nicholas Perrin	(where clause, multi-table join)
+select inv.InvoiceID
+	, CONCAT(RTrim(FirstName),' ',LastName) as [Customer Name]
+	, cast(Make.MakeDesc as char(10)) as [Make]
+	, cast(Model.ModelDesc as char(10)) as [Model]
+	, veh.VehicleYear as [Vehicle Year]
+	, '$' + convert(varchar,veh.RetailPrice) as [Retail Price]
+	, '$' + convert(varchar,inv.Price) as [Total]
+--multi-table join
+from People p join Invoice inv
+	on p.PeopleID = inv.CustomerID
+join Vehicle veh
+	on veh.VehicleID = inv.VehicleID
+join Make
+	on veh.MakeID = Make.MakeID
+join Model
+	on veh.ModelID = Model.ModelID
+--where clause
+where veh.VehicleYear > 2019;
+
+--Nicholas Perrin	(subquery)
+select InvoiceID as [Invoice ID]
+	, LastName
+	, veh.VehicleID
+	, '$' + convert(varchar,inv.Price) [Total]
+from People p join Invoice inv
+	on p.PeopleID = inv.EmployeeID
+join Vehicle veh
+	on veh.VehicleID = inv.VehicleID
+--subquery
+where CustomerID =
+		(select PeopleID
+		from People
+		where LastName = 'Sonney');
+
+--Nicholas Perrin	(set operator)
+--first select stement
+select PeopleType as [People Type]
+	,Concat(RTrim(FirstName),' ',LastName) as [Name]
+	,EmployeeLicense as [ID]
+from People p join Employee e
+	 on p.PeopleID = e.PeopleID
+--set operator
+UNION
+--second select statement
+select PeopleType as [People Type]
+	,Concat(RTrim(FirstName),' ',LastName) as [Name]
+	,CustomerCard as [ID]
+from People p join Customer c
+	 on p.PeopleID = c.PeopleID
+order by [People Type],Name;
